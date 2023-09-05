@@ -27,7 +27,7 @@ public class Topic_01_check_enviroment_testng {
 		driver.manage().window().maximize();
 		driver.get("https://www.facebook.com/");
 	}
-
+	
 	@Test
 	public void TC_01_Url() {
 		Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/");
@@ -39,7 +39,7 @@ public class Topic_01_check_enviroment_testng {
 	}
 	@Test
 	public void TC_03() {
-		System.out.println("hello");
+		System.out.println("hello world");
 	}
 
 	@Test
