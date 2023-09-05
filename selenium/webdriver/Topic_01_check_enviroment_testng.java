@@ -39,6 +39,7 @@ public class Topic_01_check_enviroment_testng {
 	}
 	@Test
 	public void TC_03() {
+		System.out.println("hello");
 	}
 
 	@Test
