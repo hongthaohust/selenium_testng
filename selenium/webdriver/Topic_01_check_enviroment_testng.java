@@ -37,14 +37,15 @@ public class Topic_01_check_enviroment_testng {
 	public void TC_02_Logo() {
 		Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo")).isDisplayed());
 	}
-	@Test
-	public void TC_03() {
-		System.out.println("hello world");
-	}
 
 	@Test
 	public void TC_03_Form() {
 		Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
+	}
+	
+	@Test
+	public void TC_04() {
+		System.out.println("hello world");
 	}
 
 	@AfterClass
