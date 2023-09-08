@@ -57,11 +57,12 @@ public class Topic_02_locator_selenium_java {
 		Dimension textboxSize = driver.findElement(By.tagName("input")).getSize();
 		System.out.println(textboxSize);
 		
-		// Css
+		// Css: Cú pháp = tagname[attribute="value"] => chỉ đi xuôi từ trên xuống dưới
+		
 //		driver.findElement(By.cssSelector("lịch hẹn")).click();
 //		Thread.sleep(3000);
 		
-		// Xpath
+		// Xpath: Cú pháp = //tagname[@attribute="value"] => có thể đi ngược từ dưới lên
 		
 	}
 
