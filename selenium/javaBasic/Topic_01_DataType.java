@@ -8,6 +8,7 @@ public class Topic_01_DataType {
 		
 		// Số nguyên: short/int/long
 		int pupilNumber = 100;
+		long timeout = 3000;
 		
 		// Số thực: fload/ double
 		float price = 123.123f;
@@ -18,6 +19,7 @@ public class Topic_01_DataType {
 		
 		System.out.println(name);
 		System.out.println(pupilNumber);
+		System.out.println(timeout);
 		System.out.println(price);
 		System.out.println(money);
 		System.out.println(sex);
