@@ -45,7 +45,7 @@ public class Topic_02_locator_selenium_java {
 		driver.findElement(By.name("commit")).click();
 		Thread.sleep(3000);
 		 
-		// Link Text Lịch sử khám
+		// Link Text
 		driver.findElement(By.linkText("Lịch sử khám")).click();
 		Thread.sleep(3000);
 		
