@@ -57,12 +57,25 @@ public class Topic_02_locator_selenium_java {
 		Dimension textboxSize = driver.findElement(By.tagName("input")).getSize();
 		System.out.println(textboxSize);
 		
+		// Css:
+		
+		driver.findElement(By.cssSelector("lịch hẹn")).click();
+		Thread.sleep(3000);
+		
 		// Css: Cú pháp = tagname[attribute="value"] => chỉ đi xuôi từ trên xuống dưới
 		
-//		driver.findElement(By.cssSelector("lịch hẹn")).click();
-//		Thread.sleep(3000);
-		
 		// Xpath: Cú pháp = //tagname[@attribute="value"] => có thể đi ngược từ dưới lên
+		
+		// Contains: text có thể ở đầu/giữa/cuối
+			// Tương đối: //tagname[contains(@attribute,'value')]
+					  	  //tagname[contains(text(),'value')]
+			// Tuyệt đối: //tagname[@attribute='value']
+		  			  	  //tagname[text()='value']
+		
+		// Starts-with: text phải ở đầu chuỗi
+						//tagname[starts-with(@attribute,'value')]
+						//tagname[starts-with(text(),'value')]
+		
 		
 	}
 

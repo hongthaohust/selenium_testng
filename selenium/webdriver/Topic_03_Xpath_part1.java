@@ -30,7 +30,7 @@ public class Topic_03_Xpath_part1 {
 	@Test
 	public void TC_01_Register_With_Empty_Data() {
 		driver.get("https://alada.vn");
-		driver.findElement(By.linkText("Đăng Ký")).click();
+		driver.findElement(By.xpath("//a[text()='Đăng Ký']")).click();
 		
 		driver.findElement(By.id("txtFirstname")).sendKeys("");
 		driver.findElement(By.id("txtEmail")).sendKeys("");
@@ -51,7 +51,7 @@ public class Topic_03_Xpath_part1 {
 	@Test
 	public void TC_02_Register_With_Invalid_Email() {
 		driver.get("https://alada.vn");
-		driver.findElement(By.linkText("Đăng Ký")).click();
+		driver.findElement(By.xpath("//a[text()='Đăng Ký']")).click();
 		
 		driver.findElement(By.id("txtFirstname")).sendKeys("John Kennedy");
 		driver.findElement(By.id("txtEmail")).sendKeys("123@123@65dd");
@@ -72,7 +72,7 @@ public class Topic_03_Xpath_part1 {
 	@Test
 	public void TC_03_Register_With_Incorrect_Confirm_Email() {
 		driver.get("https://alada.vn");
-		driver.findElement(By.linkText("Đăng Ký")).click();
+		driver.findElement(By.xpath("//a[text()='Đăng Ký']")).click();
 		
 		driver.findElement(By.id("txtFirstname")).sendKeys("John Kennedy");
 		driver.findElement(By.id("txtEmail")).sendKeys("johnKennedy@gmail.com");
@@ -90,7 +90,7 @@ public class Topic_03_Xpath_part1 {
 	@Test
 	public void TC_04_Register_With_Password_Less_Than_6_Characters() {
 		driver.get("https://alada.vn");
-		driver.findElement(By.linkText("Đăng Ký")).click();
+		driver.findElement(By.xpath("//a[text()='Đăng Ký']")).click();
 		
 		driver.findElement(By.id("txtFirstname")).sendKeys("John Kennedy");
 		driver.findElement(By.id("txtEmail")).sendKeys("johnKennedy@gmail.com");
