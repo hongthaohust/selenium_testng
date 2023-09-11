@@ -66,7 +66,7 @@ public class Topic_02_locator_selenium_java {
 		
 		// Xpath: Cú pháp = //tagname[@attribute="value"] => có thể đi ngược từ dưới lên
 		
-		// Contains: text có thể ở đầu/giữa/cuối
+		// Contains: text có thể ở đầu/giữa/cuối với những text không phải dạng nested
 			// Tương đối: //tagname[contains(@attribute,'value')]
 					  	  //tagname[contains(text(),'value')]
 			// Tuyệt đối: //tagname[@attribute='value']
@@ -75,7 +75,28 @@ public class Topic_02_locator_selenium_java {
 		// Starts-with: text phải ở đầu chuỗi
 						//tagname[starts-with(@attribute,'value')]
 						//tagname[starts-with(text(),'value')]
+
+		// Phân biệt các loại contains
+		// Text() =
+			// Chỉ nằm trong 1 node, không có xuống dòng, không có khoảng trắng, không có nested
 		
+		// contains(text(),'')
+			// Text nằm trong 1 node, nếu là dạng nested thì text phải ở đầu chuỗi
+			// text nằm trong child node thì không lấy được
+			// text có xuống dòng, khoảng trắng thì vẫn lấy được
+			// Chỉ lấy ra được 1 giá trị đầu tiên
+		
+		// contains(.,'')
+			// Text nằm trong 1 node, nếu là dạng nested thì text ở bất kỳ vị trí nào
+			// text nằm trong child node thì vẫn lấy được
+			// text có xuống dòng, khoảng trắng thì vẫn lấy được
+			// Lấy ra được tất cả giá trị
+		
+		// contains(string(),'') - giống contains(.,'')
+		
+		//concat() - dùng khi text vừa có dấu nháy đơn, vừa có dấu nháy đôi
+		
+		// text index - hạn chế dùng
 		
 	}
 
