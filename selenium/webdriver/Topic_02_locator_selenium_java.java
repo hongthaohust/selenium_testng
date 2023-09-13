@@ -98,6 +98,8 @@ public class Topic_02_locator_selenium_java {
 		
 		// text index - hạn chế dùng
 		
+		//last() : lấy ra phần tử cuối cùng trong số các phần tử đồng cấp
+		
 	}
 
 

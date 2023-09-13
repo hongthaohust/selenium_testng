@@ -1,6 +1,8 @@
 package webdriver;
 
 import java.time.Duration;
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -113,35 +115,72 @@ public class Topic_03_Xpath_part1 {
 		driver.get("http://live.techpanda.org/");
 		driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
 		
-		driver.findElement(By.id("email")).sendKeys("tester@yopmail.com");
+		String fullname = "Thao Hong Pham";
+		String email = "tester@yopmail.com";
+		
+		driver.findElement(By.id("email")).sendKeys(email);
 		driver.findElement(By.id("pass")).sendKeys("123456");
 		
 		driver.findElement(By.xpath("//button[@id='send2']")).click();
 		
-		//Cách 1: Text ngắn, không có ký tự xuống dòng, tab, khoảng trắng ở đầu/cuối
-		String myDashboardText = driver.findElement(By.xpath("//h1")).getText();
-		Assert.assertEquals(myDashboardText, "My Dashboard");
+		//Cách 1: Tuyệt đối: Text ngắn, không có ký tự xuống dòng, tab, khoảng trắng ở đầu/cuối
+		Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "My Dashboard");
+		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed());
 		
-		// Cách 2
+		// Cách 2: Tương đối: Có ký tự xuống dòng, tab, khoảng trắng đầu/cuối
 		Assert.assertTrue(driver.findElement(By.xpath("//h1[contains(text(),'My Dashboard')]")).isDisplayed());
-		//Hello, Automation Testing!
-		//
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//p[@class='hello']//strong")).getText(),"Hello, "+ fullname +"!");
+		
+		String contactInfo = driver.findElement(By.xpath("//div[@class='col-1']//div[@class='box-content']//p")).getText();
+		Assert.assertTrue(contactInfo.contains(fullname));
+		Assert.assertTrue(contactInfo.contains(email));
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='col-1']//div[@class='box-content']//p[contains(.,'"+ fullname +"')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='col-1']//div[@class='box-content']//p[contains(.,'"+ email +"')]")).isDisplayed());
 		
 		
+		driver.findElement(By.xpath("//span[@class='label' and text()='Account']")).click();
+		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
 		
 	}
 
-//	@Test
-//	public void TC_06_Register_To_System() {
-//		driver.get("http://live.techpanda.org/");
-//		driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
-//		
-//		driver.findElement(By.id("email")).sendKeys("johnKennedy@gmail.com");
-//		driver.findElement(By.id("pass")).sendKeys("1234");
-//		
-//		driver.findElement(By.xpath("//button[@id='send2']")).click();
-//		
-//	}
+	@Test
+	public void TC_06_Register_To_System() {
+		driver.get("http://live.techpanda.org/");
+		driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
+		
+		String firstname = "John";
+		String lastname = "One";
+		String email = "johnwitch"+ randomNumber() + "@yopmail.com";
+		
+		driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
+		
+		driver.findElement(By.id("firstname")).sendKeys("John");
+		driver.findElement(By.id("middlename")).sendKeys("Witch");
+		driver.findElement(By.id("lastname")).sendKeys("One");
+		driver.findElement(By.id("email_address")).sendKeys("johnwitch@yopmail.com");
+		driver.findElement(By.id("password")).sendKeys("123456");
+		driver.findElement(By.id("confirmation")).sendKeys("123456");
+		
+		driver.findElement(By.xpath("//button[@title='Register']")).click();
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//p[@class='hello']//strong")).getText(),"Thank you for registering with Main Website Store.");
+		
+		String contactInfo = driver.findElement(By.xpath("//div[@class='col-1']//div[@class='box-content']//p")).getText();
+		Assert.assertTrue(contactInfo.contains(firstname + " " + lastname));
+		Assert.assertTrue(contactInfo.contains(email));
+		
+		driver.findElement(By.xpath("//span[@class='label' and text()='Account']")).click();
+		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
+		
+	}
+	
+	public int randomNumber() {
+		Random rand = new Random();
+		return rand.nextInt(999999);
+	}
+	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
