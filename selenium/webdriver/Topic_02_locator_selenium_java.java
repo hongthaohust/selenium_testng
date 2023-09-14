@@ -59,12 +59,11 @@ public class Topic_02_locator_selenium_java {
 		
 		// Css:
 		
-		driver.findElement(By.cssSelector("lịch hẹn")).click();
+		driver.findElement(By.cssSelector("div[class='box-tool']")).click();
 		Thread.sleep(3000);
 		
-		// Css: Cú pháp = tagname[attribute="value"] => chỉ đi xuôi từ trên xuống dưới
 		
-		// Xpath: Cú pháp = //tagname[@attribute="value"] => có thể đi ngược từ dưới lên
+		// Xpath: Cú pháp = //tagname[@attribute="value"] => có thể đi ngược từ dưới lên, không có ends-with
 		
 		// Contains: text có thể ở đầu/giữa/cuối với những text không phải dạng nested
 			// Tương đối: //tagname[contains(@attribute,'value')]
@@ -98,7 +97,48 @@ public class Topic_02_locator_selenium_java {
 		
 		// text index - hạn chế dùng
 		
-		//last() : lấy ra phần tử cuối cùng trong số các phần tử đồng cấp
+		// last() : lấy ra phần tử cuối cùng trong số các phần tử đồng cấp
+		
+		// position() : lấy ra phần tử có vị trí được đánh dấu trong số các phần tử đồng cấp
+			// cấu trúc: position()= 'stt'
+		
+		// outside parent: bọc parent lại sau đó mới gọi đến last() hoặc position
+			// cấu trúc: (parent)[last()] hoặc (parent)[position()='stt']
+		
+		// Axes
+			// ancestor (tổ tiên)
+			// parent (cha)
+			// preceding (bác) => không đúng
+			// following (chú) => không đúng
+			// preceding-sibling (anh của node hiện tại)
+			// following-sibling (em của node hiện tại)
+			// child (con)
+			// descendant (con + cháu của node hiện tại)
+		
+		
+		// CSS: Cú pháp = tagname[attribute="value"] -> Lưu ý: chỉ làm việc với attribute, không làm việc với text. Không đi ngược được.
+			// # = id (vd: #email | input#email | input[id='email'])
+			// . = class (vd: .input-box | div.input-box | div[class='input-box') -> Lưu ý: thêm dấu "chấm" nếu class có chứa khoảng trắng
+			// * = contains (vd: input[title*='Sign up'])
+			// ^ = starts-with (vd: input[title^='Sign up'])
+			// $ = end-with (vd: input[title$='newsletter'])
+			// space > space = child(/) -> đi qua 1 node
+			// sapce = đi nhiều node
+			// + = following-sibling
+			// attribute: bỏ // và @
+			// [A][B] = A and B (vd: input[name='login[username]']#email | input[name='login[username]'][id= 'email'])
+			// A , B = A or B (vd: input#email,[class*='input-text'])
+			// nth-child(index) = index (vd: div[class='footer']>div:nth-child(1))
+			// first-child
+			// last-child
+		
+		// Console
+			// Verify:
+				// Xpath = $x
+				// Css = $$
+				// JQuery = $ - Lưu ý: JQuery chỉ bắt với Css, không bắt được Xpath
+		
+		//Perfomance: https://prnt.sc/B437yR5838LS
 		
 	}
 
