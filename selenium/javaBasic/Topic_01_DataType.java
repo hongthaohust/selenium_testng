@@ -1,12 +1,28 @@
 package javaBasic;
 
 public class Topic_01_DataType {
+	/* Kiểu dữ liệu nguyên thủy: 
+	 * byte/short/int/longfloat/double: Số
+	 * char: Ký tự
+	 * boolean: logic (true/false)
+	
+	 * Kiểu dữ liệu tham chiếu:
+	 * String: chuỗi
+	 * Array: mảng
+	 * Class/Object
+	 * Collect: List/ Set
+	*/
 
 	public static void main(String[] args) {
+		
+	
 		// Chuỗi
 		String name = "Nguyễn Văn A";
 		
-		// Số nguyên: short/int/long
+		//Ký tự
+		char c = 's';
+		
+		// Số nguyên: byte/short/int/long
 		int pupilNumber = 100;
 		long timeout = 3000;
 		
@@ -14,7 +30,7 @@ public class Topic_01_DataType {
 		float price = 123.123f;
 		double money = 321.321d;
 		
-		// Boolean
+		// Logic: boolean
 		boolean sex = true;
 		
 		System.out.println(name);
@@ -23,6 +39,7 @@ public class Topic_01_DataType {
 		System.out.println(price);
 		System.out.println(money);
 		System.out.println(sex);
+		System.out.println(c);
 
 	}
 

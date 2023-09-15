@@ -132,13 +132,25 @@ public class Topic_02_locator_selenium_java {
 			// first-child
 			// last-child
 		
-		// Console
+		// Console (Selenium command)
 			// Verify:
 				// Xpath = $x
 				// Css = $$
 				// JQuery = $ - Lưu ý: JQuery chỉ bắt với Css, không bắt được Xpath
 		
 		//Perfomance: https://prnt.sc/B437yR5838LS
+		
+		// Nhân Chromium: Cốc cốc, Opera, Edge, Chrome, Brave
+		
+		// Selenium Component gồm:
+			// Selenium IDE: 
+				// Cũ (extension) ở trên trình duyệt Firefox cũ
+				// Mới (extension) ở trên trình duyệt Chrome/Firefox mới
+			// Selenium RC (Remote control) - Deprecated (lỗi thời)
+			// Selenium WebDriver *đang được sử dụng hiện nay
+			// Selenium Grid *đang được sử dụng hiện nay
+		
+		// Selenium Bindings: Java, C#, Phython, Javascript, Ruby
 		
 	}
 
