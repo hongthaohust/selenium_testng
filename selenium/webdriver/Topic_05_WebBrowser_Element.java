@@ -1,6 +1,8 @@
 package webdriver;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,7 +47,17 @@ public class Topic_05_WebBrowser_Element {
 		
 		driver.close(); // đóng tab hiện tại
 		
-		driver.quit();
+		driver.quit(); // đóng cả trình duyệt hiện tại
+		
+		driver.findElement(By.xpath("")); // Tìm 1 element
+		
+		driver.findElements(By.xpath(""));
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // thời gian để chờ tìm kiếm element
+		
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30)); // Thời gian chờ cho page tải xong
+		
+		driver.manage().timeouts().setScriptTimeout(Duration.ofSeconds(30));
 	}
 
 	@Test
