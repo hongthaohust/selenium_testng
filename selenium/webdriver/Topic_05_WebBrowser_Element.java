@@ -1,5 +1,7 @@
 package webdriver;
 
+import static org.testng.Assert.assertListContains;
+
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +20,7 @@ public class Topic_05_WebBrowser_Element {
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
 	
-	String url = "https://facebook.com";
+	String url = "http://live.techpanda.org/";
 
 	@BeforeClass
 	public void beforeClass() {
@@ -34,41 +36,59 @@ public class Topic_05_WebBrowser_Element {
 	}
 	
 	@Test
-	public void TC_01_Web_Browser() {
+	public void TC_01_Verify_Url() {
 		driver.get(url);
 		
-		driver.getCurrentUrl();
+		driver.findElement(By.cssSelector(".footer a[title='My Account']")).click();
 		
-		driver.getPageSource(); //mã code của trang hiện tại
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
 		
-		driver.getTitle();
+		driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
 		
-		driver.getWindowHandle(); // ID tab hiện tại
-		
-		driver.close(); // đóng tab hiện tại
-		
-		driver.quit(); // đóng cả trình duyệt hiện tại
-		
-		driver.findElement(By.xpath("")); // Tìm 1 element
-		
-		driver.findElements(By.xpath(""));
-		
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // thời gian để chờ tìm kiếm element
-		
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30)); // Thời gian chờ cho page tải xong
-		
-		driver.manage().timeouts().setScriptTimeout(Duration.ofSeconds(30));
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
 	}
 
 	@Test
-	public void TC_02() {
+	public void TC_02_Verify_Title() {
+		driver.get(url);
+		
+		driver.findElement(By.cssSelector(".footer a[title='My Account']")).click();
+		
+		Assert.assertEquals(driver.getTitle(), "Customer Login");
+		
+		driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+		
+		Assert.assertEquals(driver.getTitle(), "Create New Customer Account");
 	}
 	@Test
-	public void TC_03() {
+	public void TC_03_Navigate_Function() {
+		driver.get(url);
+		
+		driver.findElement(By.cssSelector(".footer a[title='My Account']")).click();
+		
+		driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+		
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
+		
+		driver.navigate().back();
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
+		
+		driver.navigate().forward();
+		Assert.assertEquals(driver.getTitle(), "Create New Customer Account");
 	}
 
 	@Test
-	public void TC_04() {
+	public void TC_04_Get_Page_Source_Code() {
+		driver.get(url);
+		
+		driver.findElement(By.cssSelector(".footer a[title='My Account']")).click();
+		
+		Assert.assertTrue(driver.getPageSource().contains("Login or Create an Account"));
+		
+		driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+		
+		Assert.assertTrue(driver.getPageSource().contains("Create an Account"));
+
 	}
 
 	@AfterClass
