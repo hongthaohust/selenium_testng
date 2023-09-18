@@ -152,6 +152,11 @@ public class Topic_02_locator_selenium_java {
 		
 		// Selenium Bindings: Java, C#, Phython, Javascript, Ruby
 		
+		// Tiêu chuẩn testcase Automation = AAA (Arrange - Action - Assert)
+		// @BeforeClass = Pre-condition (Arrange)
+		// @Test = Step (Action)
+		// @Test = Kiểm tra, verify (Assert)
+		
 	}
 
 

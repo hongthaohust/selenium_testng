@@ -1,7 +1,5 @@
 package webdriver;
 
-import static org.testng.Assert.assertTrue;
-
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
