@@ -138,7 +138,7 @@ public class Topic_08_dropdownList_default {
 	}
 	
 	@Test
-	public void TC_03_dropdownList_3() {
+	public void TC_03_dropdownList_3() throws InterruptedException {
 		driver.get("https://www.rode.com/wheretobuy");
 		
 		select = new Select(driver.findElement(By.id("country")));
@@ -148,6 +148,8 @@ public class Topic_08_dropdownList_default {
 		Assert.assertEquals(select.getFirstSelectedOption().getText(), "Vietnam");
 		
 		driver.findElement(By.xpath("//button[text()='Search']")).click();
+		
+		Thread.sleep(3000);
 		
 		List<WebElement> dealers = driver.findElements(By.xpath("//h3[text()='Dealers']//following-sibling::div//h4[@class='text-left']"));
 		for (WebElement option : dealers) {
