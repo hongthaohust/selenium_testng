@@ -131,12 +131,17 @@ public class Topic_02_locator_selenium_java {
 			// nth-child(index) = index (vd: div[class='footer']>div:nth-child(1))
 			// first-child
 			// last-child
+		// https://prnt.sc/8Ki-iHx0vIRg
+		// https://prnt.sc/RCd935GzPKK5
+		// https://prnt.sc/dgWmtxr1KDEt
 		
 		// Console (Selenium command)
+			// Cho phép copy paste dùng lệnh: allow pasting
 			// Verify:
 				// Xpath = $x
 				// Css = $$
 				// JQuery = $ - Lưu ý: JQuery chỉ bắt với Css, không bắt được Xpath
+		
 		
 		//Perfomance: https://prnt.sc/B437yR5838LS
 		
