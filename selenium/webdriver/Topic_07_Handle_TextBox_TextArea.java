@@ -26,7 +26,7 @@ public class Topic_07_Handle_TextBox_TextArea {
 		}
 
 		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 		driver.manage().window().maximize();
 	}
 
@@ -63,9 +63,10 @@ public class Topic_07_Handle_TextBox_TextArea {
 
 	@Test
 	public void TC_02_TextBox_TextArea_02() throws InterruptedException {
+		int rand = getRandomNumber();
 		String firstName = "Huong";
 		String lastName = "Nguyen";
-		String username = "username_Huong" + getRandomNumber();
+		String username = "username_Huong" + rand;
 		String number = "123456";
 		String comment = "Nguyen\nXuong dong";
 		String password = "a123456";
@@ -82,12 +83,14 @@ public class Topic_07_Handle_TextBox_TextArea {
 		
 		driver.findElement(By.name("firstName")).sendKeys(firstName);
 		driver.findElement(By.name("lastName")).sendKeys(lastName);
+		driver.findElement(By.xpath("//label[text()='Employee Id']//parent::div//following-sibling::div/input")).clear();
+		driver.findElement(By.xpath("//label[text()='Employee Id']//parent::div//following-sibling::div/input")).sendKeys(""+rand);
 		
 		String EmployeeID = driver.findElement(By.xpath("//label[text()='Employee Id']//parent::div//following-sibling::div/input")).getAttribute("value");
 		
-		WebElement checkbox = driver.findElement(By.xpath("//p[text()='Create Login Details']//following-sibling::div"));
-		Thread.sleep(3000);
-		checkbox.click();
+//		WebElement checkbox = driver.findElement(By.xpath("//p[text()='Create Login Details']//following-sibling::div"));
+//		Thread.sleep(3000);
+//		checkbox.click();
 		
 //		synchronized (checkbox) {
 //			try {
@@ -97,6 +100,9 @@ public class Topic_07_Handle_TextBox_TextArea {
 //	            e.printStackTrace();
 //	        	}
 //			}
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//p[text()='Create Login Details']//following-sibling::div")).click();
 		
 		driver.findElement(By.xpath("//label[text()='Username']//parent::div//following-sibling::div/input")).sendKeys(username);
 		driver.findElement(By.xpath("//label[text()='Password']//parent::div//following-sibling::div/input")).sendKeys(password);
@@ -142,6 +148,7 @@ public class Topic_07_Handle_TextBox_TextArea {
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Comments']//parent::div//following-sibling::div/textarea")).getAttribute("value"), comment);
 		
 	}
+
 	public void TC_03_TextBox_TextArea_03() {
 	}
 
