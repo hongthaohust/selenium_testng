@@ -22,11 +22,16 @@ public class Topic_06_TextBox_TextArea_dropdownList {
 		
 		// DropdownList
 		/* Dạng default (thẻ select - option)
-		 * Dạng Custom (thẻ div, span, ul, li, ...)
-		 */
+		 * Dạng Custom (thẻ div, span, ul, li, ...)*/
 		// Selenium chỉ hỗ trợ cho dropdown dạng default (thẻ sellect - option)
 		// Thư viện cho front-end: Jquery, KendoUI, Bootstrap, Argular, ... -> hỗ trợ viết css
 		
+
+		// Angular dropdown
+		/* Get attribute of aria-label - Only word for Chrome
+		 * Get attribute of value - Work for Chrome/Firefox
+		 * Get by Javascript Executor (querySelector) - Work for Chrome/Firefox
+		 */
 		
 	}
 

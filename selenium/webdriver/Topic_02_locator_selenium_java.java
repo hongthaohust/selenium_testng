@@ -162,6 +162,8 @@ public class Topic_02_locator_selenium_java {
 		// @Test = Step (Action)
 		// @Test = Kiểm tra, verify (Assert)
 		
+		
+		// Tips: truyền vào chuỗi chứa dấu "" thì có cách nào để nó nhận kí tự "" đó -> Truyền vào ký tự "\" trước dấu nháy đôi (vd: "return \"Tôi cảm ơn bạn\" rất nhiều!")
 	}
 
 
