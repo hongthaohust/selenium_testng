@@ -13,7 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_10_handle_button_radio_checkbox_Alert {
+public class Topic_10_handle_button_radio_checkbox {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
@@ -109,7 +109,7 @@ public class Topic_10_handle_button_radio_checkbox_Alert {
 	
 	@Test
 	public void TC_03_checkbox_radio_custom() {
-		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
+//		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
 		
 		// Cách 1
 //		WebElement RadioLabel = driver.findElement(By.xpath("//div[contains(text(),'Đăng ký cho người thân')]/parent::label"));
@@ -119,15 +119,22 @@ public class Topic_10_handle_button_radio_checkbox_Alert {
 //		Assert.assertTrue(elementIsSellected(RadioInput));
 		
 		// Cách 2: dùng JS để click vào item bị hidden (ẩn)
-		WebElement RadioInput = driver.findElement(By.xpath("//div[contains(text(),'Đăng ký cho người thân')]/preceding-sibling::div/input"));
-		clickElementByJS(RadioInput);
-		Assert.assertTrue(elementIsSellected(RadioInput));
+//		WebElement RadioInput = driver.findElement(By.xpath("//div[contains(text(),'Đăng ký cho người thân')]/preceding-sibling::div/input"));
+//		clickElementByJS(RadioInput);
+//		Assert.assertTrue(elementIsSellected(RadioInput));
+		
+		
+		driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
+		Assert.assertFalse(driver.findElement(By.xpath("//div[@data-value='Hà Nội']//div[@class='rseUEf nQOrEb']")).isDisplayed());
+		Assert.assertFalse(driver.findElement(By.xpath("//div[@data-value='Hải Phòng']//div[@class='rseUEf nQOrEb']")).isDisplayed());
+		WebElement country = driver.findElement(By.xpath("//div[@data-value='Hà Nội']"));
+		country.click();
+		sleepInSecond(3);
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@data-value='Hà Nội']//div[@class='rseUEf nQOrEb']")).isDisplayed());
+		Assert.assertFalse(driver.findElement(By.xpath("//div[@data-value='Hải Phòng']//div[@class='rseUEf nQOrEb']")).isDisplayed());
 		
 	}
 	
-	public void TC_04_alert() {
-		
-	}
 	
 	public boolean elementIsEnabled(By by) {
 		WebElement element = driver.findElement(by);
@@ -139,6 +146,7 @@ public class Topic_10_handle_button_radio_checkbox_Alert {
 			return false;
 		}
 	}
+	
 	
 	// Chỉ click được vào element bị ẩn, không click được vào element bị disable
 	public void clickByJS(By by) {

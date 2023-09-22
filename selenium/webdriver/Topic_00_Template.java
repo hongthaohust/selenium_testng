@@ -3,7 +3,6 @@ package webdriver;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -18,12 +17,12 @@ public class Topic_00_Template {
 	@BeforeClass
 	public void beforeClass() {
 		if (osName.contains("Windows")) {
-			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		} else {
-			System.setProperty("webdriver.chrome.driver", projectPath + "/browserDrivers/chromedriver");
+			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
 		}
 
-		driver = new ChromeDriver();
+		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().window().maximize();
 	}

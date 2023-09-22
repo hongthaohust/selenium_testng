@@ -20,6 +20,13 @@ public class Topic_07_Radio_Checkbox_Alert {
 		 * - Loại 2: Alert Confirm: cho chọn yes/no (code js = Confirm("title alert"))
 		 * - Loại 3: Alert Input: cho phép nhập text (code js = prompt("title alert"))
 		 * 
+		 * Các action với alert:
+		 * 1. Click để hiển thị alert
+		 * 2. Switch vào alert
+		 * 3. Get text của alert -> kiểm tra text có đúng không
+		 * 4. Send text vào alert (nếu là alert input)
+		 * 5. Accept alert
+		 * 6. Cancel alert
 		 */
 	}
 
