@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class Topic_09_DropdownList_Custom {
 	WebDriver driver;
 	WebDriverWait expliciWait;
-	JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+	JavascriptExecutor jsExecutor;
 	
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
@@ -37,6 +37,7 @@ public class Topic_09_DropdownList_Custom {
 		}
 
 		driver = new FirefoxDriver();
+		jsExecutor = (JavascriptExecutor) driver;
 		expliciWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		
 		//jsExecutor = (JavascriptExecutor) driver;
@@ -55,11 +56,11 @@ public class Topic_09_DropdownList_Custom {
 		
 		selectItemDropdown("//span[@id='number-button']", "ul#number-menu div", "10");
 		sleepInSecond(1);
-		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[text()='10']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[text()='10']")).isDisplayed()); // Lỗi
 		
 		selectItemDropdown("//span[@id='number-button']", "ul#number-menu div", "15");
 		sleepInSecond(1);
-		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[text()='15']")).isDisplayed()); // Lỗi
+		Assert.assertTrue(driver.findElement(By.xpath("//span[@id='number-button']/span[text()='15']")).isDisplayed());
 		
 		selectItemDropdown("//span[@id='number-button']", "ul#number-menu div", "1");
 		sleepInSecond(1);
@@ -116,46 +117,46 @@ public class Topic_09_DropdownList_Custom {
 		
 	}
 	
-	
+	@Test
 	public void TC_05_DropDown_Angular() {
 		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
 		
 		// Mũi tiêm thứ mấy
-		selectItemDropdown("//div[text()='Đăng kí mũi tiêm thứ']/parent::div/following-sibling::span[last()]", "div[role='option']", "Mũi tiêm tiếp theo");
+		selectItemDropdownAngular("//div[text()='Đăng kí mũi tiêm thứ']/parent::div/following-sibling::span[last()]", "div[role='option'] span", "Mũi tiêm tiếp theo");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()=' Mũi tiêm tiếp theo ']")).isDisplayed());
 		
-		selectItemDropdown("//div[text()='Đăng kí mũi tiêm thứ']/parent::div/following-sibling::span[last()]", "div[role='option']", "Mũi tiêm thứ nhất");
+		selectItemDropdownAngular("//div[text()='Đăng kí mũi tiêm thứ']/parent::div/following-sibling::span[last()]", "div[role='option'] span", "Mũi tiêm thứ nhất");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()=' Mũi tiêm thứ nhất ']")).isDisplayed());
 		
 		// Giới tính
-		selectItemDropdown("//div[text()='Giới tính']/parent::div/following-sibling::span[last()]", "div[role='option']", "Nữ");
+		selectItemDropdownAngular("//div[text()='Giới tính']/parent::div/following-sibling::span[last()]", "div[role='option']  span", "Nữ");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()=' Nữ ']")).isDisplayed());
 		
-		selectItemDropdown("//div[text()='Giới tính']/parent::div/following-sibling::span[last()]", "div[role='option']", "Nam");
+		selectItemDropdownAngular("//div[text()='Giới tính']/parent::div/following-sibling::span[last()]", "div[role='option']  span", "Nam");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()=' Nam ']")).isDisplayed());
 		
 		
 		// Tỉnh/Thành phố
-		selectItemDropdown("//div[text()='Tỉnh/Thành phố']/parent::div/following-sibling::span[last()]", "ng-dropdown-panel div[role='option']", "Tỉnh Hà Giang");
+		selectItemDropdownAngular("//div[text()='Tỉnh/Thành phố']/parent::div/following-sibling::span[last()]", ".ng-dropdown-panel div[role='option']", "Tỉnh Hà Giang");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()='Tỉnh Hà Giang']")).isDisplayed());
 		
-		selectItemDropdown("//div[text()='Tỉnh/Thành phố']/parent::div/following-sibling::span[last()]", "ng-dropdown-panel div[role='option']", "Tỉnh Bắc Kạn");
+		selectItemDropdownAngular("//div[text()='Tỉnh/Thành phố']/parent::div/following-sibling::span[last()]", ".ng-dropdown-panel div[role='option']", "Tỉnh Bắc Kạn");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()='Tỉnh Bắc Kạn']")).isDisplayed());
 		
-		selectItemDropdown("//div[text()='Tỉnh/Thành phố']/parent::div/following-sibling::span[last()]", "ng-dropdown-panel div[role='option']", "Tỉnh Thái Nguyên");
+		selectItemDropdownAngular("//div[text()='Tỉnh/Thành phố']/parent::div/following-sibling::span[last()]", ".ng-dropdown-panel div[role='option']", "Tỉnh Thái Nguyên");
 		sleepInSecond(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='form-group']//span[text()='Tỉnh Thái Nguyên']")).isDisplayed());
 		
 	}
 	
 	
-	@Test
+	
 	public void TC_06_DropDown_Multiple_Select() {
 		driver.get("https://multiple-select.wenzhixin.net.cn/templates/template.html?v=189&url=basic.html");
 		sleepInSecond(1);
@@ -172,6 +173,7 @@ public class Topic_09_DropdownList_Custom {
 	public void selectItemDropdown(String parentXpath, String childCss, String expectItem) {
 		// 1. click vào cha -> xổ ra list con
 		driver.findElement(By.xpath(parentXpath)).click();
+		sleepInSecond(3);
 		
 		// 2. chờ cho các element được load ra
 		expliciWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childCss)));
@@ -189,6 +191,36 @@ public class Topic_09_DropdownList_Custom {
 				sleepInSecond(1);
 				// 7. Click vào item đó
 				actualItem.click();
+				// 8. Thoát khỏi vòng lặp
+				break;
+			}
+			
+		}
+		
+	}
+	
+	public void selectItemDropdownAngular(String parentXpath, String childCss, String expectItem) {
+		// 1. click vào cha -> xổ ra list con
+		driver.findElement(By.xpath(parentXpath)).click();
+		sleepInSecond(1); //bắt buộc ???
+		
+		// 2. chờ cho các element được load ra
+		expliciWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childCss)));
+		
+		// 3. Lấy ra hết tất cả item đưa vào list
+		List<WebElement> childItems = driver.findElements(By.cssSelector(childCss));
+		
+		// 4. Duyệt qua List, lấy ra từng item (for each)
+		for (WebElement actualItem : childItems) {
+			// 5. Mỗi lần sẽ kiểm tra item đó có bằng item cần chọn không
+			if(actualItem.getText().trim().equals(expectItem)) {
+				// 6. Nếu tìm thấy item thì scroll đến item đó
+				if(!actualItem.isDisplayed()) {
+					jsExecutor.executeScript("arguments[0].scrollIntoView(true);", actualItem);
+					sleepInSecond(1);
+				}
+				// 7. Click vào item đó
+				clickByJS(actualItem);
 				// 8. Thoát khỏi vòng lặp
 				break;
 			}
@@ -292,6 +324,11 @@ public class Topic_09_DropdownList_Custom {
 	// Lấy ra text nằm trong element bị ẩn
   	public String getHiddenText(String cssLocator) {
 		return (String) jsExecutor.executeScript("return document.querySelector(\""+cssLocator+"\").textContent");
+	}
+  	
+  	// Click by JS: chỉ click dk vào item bị ẩn, không click dk vào item bị disable
+  	public void clickByJS(WebElement element) {
+		jsExecutor.executeScript("arguments[0].click();", element);
 	}
 	
 	// Sleep
