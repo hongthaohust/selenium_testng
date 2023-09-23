@@ -1,5 +1,6 @@
 package webdriver;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.Alert;
@@ -14,13 +15,17 @@ import org.testng.annotations.Test;
 public class Topic_11_Alert {
 	WebDriver driver;
 	Alert alert;
+	
 	String inputText = "Xin chào cả nhà!";
 	
 	String projectPath = System.getProperty("user.dir");
+	String firefoxAuthen = projectPath + "\\autoITScript\\authen_firefox.exe";
+	String chromeAuthen = projectPath + "\\autoITScript\\authen_chrome.exe";
 	String osName = System.getProperty("os.name");
 
 	@BeforeClass
 	public void beforeClass() {
+		
 		if (osName.contains("Windows")) {
 			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		} else {
@@ -78,6 +83,7 @@ public class Topic_11_Alert {
 	}
 	
 	public void TC_03_Alert_Prompt() {
+		// Bài 1
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		driver.findElement(By.xpath("//button[@onclick='jsPrompt()']")).click();
 		sleepInSecond(1);
@@ -94,7 +100,7 @@ public class Topic_11_Alert {
 		
 		
 		
-		
+		// Bài 2
 		driver.findElement(By.xpath("//button[@onclick='jsPrompt()']")).click();
 		sleepInSecond(1);
 		// Switch vào alert
@@ -110,25 +116,28 @@ public class Topic_11_Alert {
 	}
 	
 	@Test
-	public void TC_04_Authentication_Alert() {
+	public void TC_04_Authentication_Alert() throws IOException {
 		String username = "admin";
 		String password = "admin";
 		
-		driver.get("http://" +username+":" +password+ "@the-internet.herokuapp.com/basic_auth");
+		//Cách 1: Xác thực username/password qua link luôn, không bật alert lên nữa
+		//driver.get("http://" +username+":" +password+ "@the-internet.herokuapp.com/basic_auth");
 		
+		// Cách 2: Từ link A qua bước xác thực authen để vào được link B
+//		driver.get("http://the-internet.herokuapp.com/");
+//				//Get link href
+//		String linkHref = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getAttribute("href");
+//		handleAuthen
+//		Alert(linkHref,username,password);
 		
-		
-		//driver.findElement(By.xpath("//a[text()='CONTINUE']")).click();
+		// Cách 3: Cài autoIT hoặc có đoạn script rồi thì không cần cài
+		Runtime.getRuntime().exec(new String[] { firefoxAuthen, username, password});
 		sleepInSecond(3);
+		driver.get("http://the-internet.herokuapp.com/basic_auth");
+
 		
-		// Switch vào alert
-		//alert = driver.switchTo().alert();
 		
-		// Get text của alert -> kiểm tra đúng text
-		//Assert.assertEquals(alert.getText(), "Customer ID  cannot be left blank.");
-		
-		// Accept alert
-		//alert.accept();
+		Assert.assertTrue(driver.findElement(By.xpath("//h3[text()='Basic Auth']")).isDisplayed());
 	}
 
 	@AfterClass
@@ -138,11 +147,18 @@ public class Topic_11_Alert {
 	
 	public void sleepInSecond(long second) {
 		try {
+			
 			Thread.sleep(second*1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void handleAuthenAlert(String link, String username, String password) {
+		String spliLink[] = link.split("//");
+		link = spliLink[0] + "//" + username + ":"+ password + "@" + spliLink[1];
+		driver.get(link);
 	}
 
 }
