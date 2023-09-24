@@ -127,13 +127,13 @@ public class Topic_11_Alert {
 //		driver.get("http://the-internet.herokuapp.com/");
 //				//Get link href
 //		String linkHref = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getAttribute("href");
-//		handleAuthen
-//		Alert(linkHref,username,password);
+//		handleAuthenAlert(linkHref,username,password);
 		
 		// Cách 3: Cài autoIT hoặc có đoạn script rồi thì không cần cài
 		Runtime.getRuntime().exec(new String[] { firefoxAuthen, username, password});
 		sleepInSecond(3);
 		driver.get("http://the-internet.herokuapp.com/basic_auth");
+		sleepInSecond(3);
 
 		
 		
