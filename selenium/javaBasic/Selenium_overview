@@ -1,0 +1,10 @@
+* Những tính năng không nên làm Automation, set độ ưu tiên thấp
+	- Những tính năng thiếu sự ổn định (stable) như:
+		+ Captcha: được sinh ra để chống auto >< OCR (nhận diện hình ảnh) - chống lại captcha
+		+ SMS, OTP, Authentication Code: chuyển tiền online, ...
+		+ QR code / Bar code
+		+ Chart: pie chart, line chart,...
+		+ Canvas
+		+ Flash/ Flex
+		+ Drag and drop
+		
