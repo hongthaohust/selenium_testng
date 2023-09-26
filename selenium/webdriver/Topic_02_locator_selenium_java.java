@@ -27,7 +27,7 @@ public class Topic_02_locator_selenium_java {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().window().maximize();
 	}
-	
+	 
 	@Test
 	public void TC_01_locator() throws InterruptedException {
 		driver.get("https://test.med247.me/users/sign_in");
