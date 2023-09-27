@@ -1,6 +1,8 @@
 package webdriver;
 
 import java.time.Duration;
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -74,8 +76,24 @@ public class Topic_14_Handle_Frame_Iframe_Windown_Tab {
 	@Test
 	public void TC_02_Windown_Tab() {
 		driver.get("https://skills.kynaenglish.vn/");
+		String parentID = driver.getWindowHandle();
+		clickToElementByJS("//div[@class='hotline']//img[@alt='facebook']");
+		sleepInsecond(1);
 		
-		clickToElementByJS()
+		switchToWindownByTitle("Kyna.vn | Ho Chi Minh City | Facebook");
+		Assert.assertEquals(driver.getCurrentUrl(),"https://www.facebook.com/kyna.vn");
+		
+		switchToWindownByTitle("Kyna.vn - Học online cùng chuyên gia");
+		clickToElementByJS("//div[@class='hotline']//img[@alt='youtube']");
+		
+		switchToWindownByTitle("Kyna.vn - YouTube");
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@id='container']//*[@id='text' and text()='Kyna.vn']")).isDisplayed());
+		
+		switchToWindownByTitle("Kyna.vn | Ho Chi Minh City | Facebook");
+		Assert.assertEquals(driver.getCurrentUrl(),"https://www.facebook.com/kyna.vn");
+		
+		closeAllWindownsWithoutParent(parentID);
+		sleepInsecond(3);
 	}
 	
 	public void TC_03() {
@@ -99,5 +117,45 @@ public class Topic_14_Handle_Frame_Iframe_Windown_Tab {
 		WebElement element = driver.findElement(By.xpath(locator));
 		
 		jsExecutor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void switchToWindownByID(String parentWindown) {
+		Set <String> allWindown = driver.getWindowHandles();
+		
+		for(String runWindown : allWindown) {
+			if(!runWindown.equals(parentWindown)) {
+				driver.switchTo().window(runWindown);
+			}
+		}
+	}
+	
+	public void switchToWindownByTitle(String title) {
+		Set<String> allWindown = driver.getWindowHandles();
+		
+		for (String currentWindown : allWindown) {
+			driver.switchTo().window(currentWindown);
+			sleepInsecond(2);
+			String currentTitle = driver.getTitle();
+			if(currentTitle.equals(title)) {
+				break;
+			}
+		}
+	}
+	
+	public boolean closeAllWindownsWithoutParent(String parentID) {
+		Set<String> allWindown = driver.getWindowHandles();
+		for (String currentWindown : allWindown) {
+			if(!currentWindown.equals(parentID)) {
+				driver.switchTo().window(currentWindown);
+				driver.close();
+			}
+		}
+		driver.switchTo().window(parentID);
+		
+		if(driver.getWindowHandles().size()==1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
