@@ -46,6 +46,21 @@ public class Topic_15_Javascript_Executor {
 
 	@Test
 	public void TC_02_Demo_Javascript() {
+		// 1. vào trang "https://demo.guru99.com/"
+		
+		// 2. Click link "My Account" trên header để tới trang đăng nhập
+		
+		// 3. Click "Create an account" để tới trang đăng ký
+		
+		// 4. Nhập thông tin hợp lệ
+		
+		// 5. Click Register
+		
+		// 6. Verify message xuất hiện "Thank you for registering with Main Website Store"
+		
+		// 7. Logout khỏi hệ thống
+		
+		// 8. Kiểm tra hệ thống navigate về Homepage sau khi logout (Sử dụng isDisplayed để check wait)
 	}
 	
 	
@@ -66,6 +81,7 @@ public class Topic_15_Javascript_Executor {
 		}
 	}
 	
+	// Browser
 	public Object executeForBrowser(String javaScript) {
 		return jsExecutor.executeScript(javaScript);
 	}
@@ -88,6 +104,7 @@ public class Topic_15_Javascript_Executor {
 		sleepInSecond(3);
 	}
 
+	// Element
 	public void hightlightElement(String locator) {
 		WebElement element = getElement(locator);
 		String originalStyle = element.getAttribute("style");
