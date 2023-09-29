@@ -123,8 +123,10 @@ public class Topic_15_Javascript_Executor {
 		
 		sleepInSecond(5);
 		// 7. Click Tạo và verify tạo thành công
+		clickToElementByJS("//input[@id='patientSubmit']");
 		
 		// 8. Logout khỏi hệ thống
+		
 		
 		// 9. Kiểm tra hệ thống navigate về Homepage sau khi logout (Sử dụng isDisplayed để check wait)
 	}
