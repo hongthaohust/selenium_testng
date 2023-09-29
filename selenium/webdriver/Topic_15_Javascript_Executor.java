@@ -1,11 +1,16 @@
 package webdriver;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,6 +19,7 @@ import org.testng.annotations.Test;
 public class Topic_15_Javascript_Executor {
 	WebDriver driver;
 	JavascriptExecutor jsExecutor;
+	WebDriverWait expliciWait;
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
 
@@ -27,6 +33,7 @@ public class Topic_15_Javascript_Executor {
 
 		driver = new FirefoxDriver();
 		jsExecutor = (JavascriptExecutor) driver;
+		expliciWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().window().maximize();
 
@@ -44,15 +51,23 @@ public class Topic_15_Javascript_Executor {
 		Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Laundry Bags & Baskets']")).isDisplayed());
 	}
 
-	@Test
-	public void TC_02_Demo_Javascript() {
-		// 1. vào trang "https://demo.guru99.com/"
+	
+	public void TC_02_Demo_Javascript_demoguru99() {
+		// 1. vào trang "https://demo.guru99.com"
+		
+		navigateToUrlByJS("https://demo.guru99.com/");
 		
 		// 2. Click link "My Account" trên header để tới trang đăng nhập
 		
+		clickToElementByJS("");
+		
 		// 3. Click "Create an account" để tới trang đăng ký
 		
+		clickToElementByJS("");
+		
 		// 4. Nhập thông tin hợp lệ
+		
+		
 		
 		// 5. Click Register
 		
@@ -63,8 +78,55 @@ public class Topic_15_Javascript_Executor {
 		// 8. Kiểm tra hệ thống navigate về Homepage sau khi logout (Sử dụng isDisplayed để check wait)
 	}
 	
-	
-	public void TC_03() {
+	@Test
+	public void TC_03_Demo_Javascript_Med247() {
+		String user_login = "letan_test_prefix@med247.co";
+		String password = "Med247@";
+		int rand = random();
+		String username = "Automation"+rand;
+		String dateOfBirth = "12/08/1997";
+		String phoneNumber ="035511"+rand;
+		// 1. vào trang "https://test.med247.me/users/sign_in"
+		
+		navigateToUrlByJS("https://test.med247.me/users/sign_in");
+		
+		// 2. Nhập thông tin đăng nhập
+		sendkeyToElementByJS("//input[@id='user_login']",user_login);
+		sendkeyToElementByJS("//input[@id='user_password']",password);
+		
+		// 3. Click button Đăng nhập
+		
+		clickToElementByJS("//input[@type='submit']");
+		
+		// 4. Verify đăng nhập thành công chứa text "Bảng điều khiển"
+		
+		sleepInSecond(3);
+		Assert.assertTrue(getElement("//div[contains(text(),'Bảng điều khiển')]").isDisplayed());
+		
+		// 5. Click "+Bệnh nhân mới"
+		clickToElementByJS("//ul[@class='nav navbar-nav ml-auto flex-row']//div[@class='d-none d-lg-block'][3]//a");
+		
+		// 6. Nhập thông tin bệnh nhân: chủ tài khoản
+		sendkeyToElementByJS("//label[text()='Họ Tên ']/following-sibling::input",username);
+		
+			// Chọn ngày sinh
+		// sendkeyToElementByJS("//input[@id='patient_birthday']",dateOfBirth); //C1: Sendkey - đang không work
+		
+			// Chọn dropdown giới tính = Nữ
+		selectItemDropdown("//span[@id='select2-patient_gender-container']","//ul[@id='select2-patient_gender-results']/li","Nữ");
+		
+		sendkeyToElementByJS("//label[text()='Điện thoại ']/following-sibling::input",phoneNumber);
+			// chọn Tỉnh/TP
+		selectItemDropdown("//span[@id='select2-patient_city_id-container']","//span[@class='select2-results']//li","Thành phố Hải Phòng");
+			//Chọn Quận/huyện
+		selectItemDropdown("//span[@id='select2-patient_district_id-container']","//span[@class='select2-results']//li","Huyện Vĩnh Bảo");
+		
+		sleepInSecond(5);
+		// 7. Click Tạo và verify tạo thành công
+		
+		// 8. Logout khỏi hệ thống
+		
+		// 9. Kiểm tra hệ thống navigate về Homepage sau khi logout (Sử dụng isDisplayed để check wait)
 	}
 
 	@AfterClass
@@ -151,9 +213,51 @@ public class Topic_15_Javascript_Executor {
 				"return arguments[0].complete && typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0", getElement(locator));
 		return status;
 	}
+	
+	// hàm common (dùng chung) - không fix cứng dữ liệu trong hàm
+	public void selectItemDropdown(String parentXpath, String childXpath, String expectItem) {
+		// 1. click vào cha -> xổ ra list con
+		driver.findElement(By.xpath(parentXpath)).click();
+		sleepInSecond(1);
+		
+		// 2. chờ cho các element được load ra
+		expliciWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(childXpath)));
+		
+		// 3. Lấy ra hết tất cả item đưa vào list
+		List<WebElement> childItems = driver.findElements(By.xpath(childXpath));
+		
+		// 4. Duyệt qua List, lấy ra từng item (for each)
+		for (WebElement actualItem : childItems) {
+			// 5. Mỗi lần sẽ kiểm tra item đó có bằng item cần chọn không
+			if(actualItem.getText().trim().equals(expectItem)) {
+				sleepInSecond(1);
+				// 6. Nếu tìm thấy item thì scroll đến item đó
+				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", actualItem);
+				sleepInSecond(1);
+				// 7. Click vào item đó
+				actualItem.click();
+				// 8. Thoát khỏi vòng lặp
+				break;
+			}
+			
+		}
+		
+	}
+		
+	public void select_DateofBirth(String locator) {
+		WebElement element = driver.findElement(By.xpath(locator));
+		
+	}
+		
 
 	public WebElement getElement(String locator) {
 		return driver.findElement(By.xpath(locator));
 	}
+	
+	public int random() {
+		Random rand = new Random();
+		return rand.nextInt(9999);
+	}
+
 
 }
