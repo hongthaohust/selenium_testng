@@ -1,6 +1,7 @@
 package webdriver;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -54,11 +55,9 @@ public class Topic_15_Javascript_Executor {
 	
 	public void TC_02_Demo_Javascript_demoguru99() {
 		// 1. vào trang "https://demo.guru99.com"
-		
 		navigateToUrlByJS("https://demo.guru99.com/");
 		
 		// 2. Click link "My Account" trên header để tới trang đăng nhập
-		
 		clickToElementByJS("");
 		
 		// 3. Click "Create an account" để tới trang đăng ký
@@ -110,7 +109,8 @@ public class Topic_15_Javascript_Executor {
 		sendkeyToElementByJS("//label[text()='Họ Tên ']/following-sibling::input",username);
 		
 			// Chọn ngày sinh
-		// sendkeyToElementByJS("//input[@id='patient_birthday']",dateOfBirth); //C1: Sendkey - đang không work
+		driver.findElement(By.xpath("//input[@id='patient_birthday']")).sendKeys(dateOfBirth);
+		//sendkeyDateToElementByJS("//input[@id='patient_birthday']",day,month,year); //C1: Sendkey - đang không work
 		
 			// Chọn dropdown giới tính = Nữ
 		selectItemDropdown("//span[@id='select2-patient_gender-container']","//ul[@id='select2-patient_gender-results']/li","Nữ");
@@ -122,13 +122,24 @@ public class Topic_15_Javascript_Executor {
 		selectItemDropdown("//span[@id='select2-patient_district_id-container']","//span[@class='select2-results']//li","Huyện Vĩnh Bảo");
 		
 		sleepInSecond(5);
-		// 7. Click Tạo và verify tạo thành công
+		// 7. Click Tạo và verify popup xuất hiện
 		clickToElementByJS("//input[@id='patientSubmit']");
+		sleepInSecond(2);
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='swal-title']")).isDisplayed());
+		// 8. Đóng popup và verify tạo tk thành công
+		clickToElementByJS("//div[@class='swal-footer']//button[text()='Đóng']");
+		if(driver.findElement(By.xpath("//h5[text()='Phiếu khám mới']")).isDisplayed()) {
+			clickToElementByJS("//button[@id='newPatientWithHealthRecordToEmail']/following-sibling::button");
+		}
 		
-		// 8. Logout khỏi hệ thống
+		Assert.assertEquals(driver.findElement(By.xpath("//div[@class='box-body']//h2")).getText(),username);
 		
+		// 9. Logout khỏi hệ thống
+		clickToElementByJS("//a[text()=' Đăng xuất']");
 		
-		// 9. Kiểm tra hệ thống navigate về Homepage sau khi logout (Sử dụng isDisplayed để check wait)
+		// 10. Kiểm tra hệ thống navigate về Homepage sau khi logout (Sử dụng isDisplayed để check wait)
+		String URL = (String) executeForBrowser("return document.URL");
+		Assert.assertEquals(URL, "https://test.med247.me/users/sign_in");
 	}
 
 	@AfterClass
@@ -243,11 +254,6 @@ public class Topic_15_Javascript_Executor {
 			}
 			
 		}
-		
-	}
-		
-	public void select_DateofBirth(String locator) {
-		WebElement element = driver.findElement(By.xpath(locator));
 		
 	}
 		
