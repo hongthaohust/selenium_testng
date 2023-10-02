@@ -77,15 +77,34 @@ public class Topic_16_Upload_File {
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='"+imageName[2]+"']")).isDisplayed());
 	}
 
-	@Test
-	public void TC_02() {
+	
+	public void TC_02_SendKey_02() {
 		driver.get("https://gofile.io/uploadFiles");
 		WebElement uploadFiles = driver.findElement(By.xpath("//input[@type='file']"));
 		uploadFiles.sendKeys(imagePath[0] + "\n" + imagePath[1] +"\n" + imagePath[2]);
+		sleepInSecond(10);
+		
+		driver.findElement(By.xpath("//div[contains(@class,'mainUploadSuccessLink')]//a")).click();
 		sleepInSecond(3);
+		
+		for (String image : imageName) {
+			WebElement download = driver.findElement(By.xpath("//span[text()='"+image+"']//ancestor::div[contains(@class,'text-truncate')]//following-sibling::div//span[text()='Download']"));
+			WebElement play = driver.findElement(By.xpath("//span[text()='"+image+"']//ancestor::div[contains(@class,'text-truncate')]//following-sibling::div//span[text()='Play']"));
+			
+			Assert.assertTrue(download.isDisplayed());
+			Assert.assertTrue(play.isDisplayed());
+		}
+		
 	}
 	
-	public void TC_03() {
+	@Test
+	public void TC_03_AutoIT() {
+		driver.get("");
+		
+		
+	}
+	
+	public void TC_04_Java_Robot() {
 	}
 
 	@AfterClass
