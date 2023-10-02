@@ -1,5 +1,11 @@
 package webdriver;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -19,9 +25,12 @@ public class Topic_16_Upload_File {
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
 	
-	String path = System.getProperty("user.dir") + "\\uploadFiles\\";
+	String path = projectPath + "\\uploadFiles\\";
 	String[] imageName = {"med247_01.jpg", "med247_02.jpg", "mypicture_01.jpg"};
 	String[] imagePath = {path+"med247_01.jpg", path + "med247_02.jpg", path + "mypicture_01.jpg"};
+	
+	String firefox_autoIT1 = projectPath + "\\autoITScript\\firefoxUploadOneTime.exe";
+	String firefox_autoIT2 = projectPath + "\\autoITScript\\firefoxUploadMultiple.exe";
 
 	@BeforeClass
 	public void beforeClass() {
@@ -38,7 +47,7 @@ public class Topic_16_Upload_File {
 	}
 	
 	
-	public void TC_01_sendKey() {
+	public void TC_01_sendKey_01() {
 		driver.get("https://blueimp.github.io/jQuery-File-Upload/");
 		
 //		WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
@@ -97,14 +106,85 @@ public class Topic_16_Upload_File {
 		
 	}
 	
-	@Test
-	public void TC_03_AutoIT() {
-		driver.get("");
+	
+	public void TC_03_AutoIT_01() throws IOException {
+		driver.get("https://gofile.io/uploadFiles");
+		
+//		driver.findElement(By.xpath("//div[@id='filesUpload']//button[contains(@class,'filesUploadButton')]")).click();
+//		sleepInSecond(3);
+//		Runtime.getRuntime().exec(new String[] {firefox_autoIT1,imagePath[0]});   // Thực thi file .exe đã inject - Upload 1 file
 		
 		
+		driver.findElement(By.xpath("//div[@id='filesUpload']//button[contains(@class,'filesUploadButton')]")).click();
+		sleepInSecond(2);
+		Runtime.getRuntime().exec(new String[] {firefox_autoIT2,imagePath[0],imagePath[1],imagePath[2]});    // Thực thi file .exe đã inject - Upload nhiều file
+		
+		
+		sleepInSecond(17);
+		driver.findElement(By.xpath("//div[contains(@class,'mainUploadSuccessLink')]//a")).click();
+		sleepInSecond(3);
+		
+		for (String image : imageName) {
+			WebElement download = driver.findElement(By.xpath("//span[text()='"+image+"']//ancestor::div[contains(@class,'text-truncate')]//following-sibling::div//span[text()='Download']"));
+			WebElement play = driver.findElement(By.xpath("//span[text()='"+image+"']//ancestor::div[contains(@class,'text-truncate')]//following-sibling::div//span[text()='Play']"));
+			
+			Assert.assertTrue(download.isDisplayed());
+			Assert.assertTrue(play.isDisplayed());
+		}
 	}
 	
-	public void TC_04_Java_Robot() {
+	
+	public void TC_04_AutoIT_02() throws IOException {
+		driver.get("https://blueimp.github.io/jQuery-File-Upload/");
+		
+		driver.findElement(By.cssSelector(".fileinput-button")).click();
+		Runtime.getRuntime().exec(new String[] {firefox_autoIT1,imagePath[0]});   // Thực thi file .exe đã inject - Upload 1 file
+		sleepInSecond(5);
+		
+		driver.findElement(By.cssSelector(".fileinput-button")).click();
+		Runtime.getRuntime().exec(new String[] {firefox_autoIT1,imagePath[1]});   // Thực thi file .exe đã inject - Upload 1 file
+		sleepInSecond(5);
+		
+		driver.findElement(By.cssSelector(".fileinput-button")).click();
+		Runtime.getRuntime().exec(new String[] {firefox_autoIT1,imagePath[2]});   // Thực thi file .exe đã inject - Upload 1 file
+		
+		sleepInSecond(3);
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='"+imageName[0]+"']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='"+imageName[1]+"']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='"+imageName[2]+"']")).isDisplayed());
+	}
+	
+	
+	@Test
+	public void TC_05_Java_Robot() throws AWTException {
+		// Giả lập hành vi người dùng: copy paste đường dẫn
+		
+		driver.get("https://gofile.io/uploadFiles");
+		
+		driver.findElement(By.xpath("//div[@id='filesUpload']//button[contains(@class,'filesUploadButton')]")).click();
+		sleepInSecond(1);
+		
+		// Copy file path
+		StringSelection select = new StringSelection(imagePath[0]);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(select, null);
+		
+		// Load file
+		Robot robot = new Robot();
+		sleepInSecond(1);
+		
+		// Nhấn xuống Ctrl-V
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		
+		// Nhả Ctrl-V
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_V);
+		sleepInSecond(1);
+		
+		// Nhấn enter
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		sleepInSecond(10);
 	}
 
 	@AfterClass
