@@ -1,0 +1,17 @@
+* Một element có 4 trạng thái chính:
+
+- Visible (element hiển thị): Có thể nhìn thấy và thao tác được
+	+ Có trên dom 
+	+ Có trên UI màn hình
+	+ Tips: bắt Xpath thì có thấy hiển thị
+	
+- Invisible (element bị ẩn): Người dùng không nhìn thấy, không thao tác được
+	+ TH1: Có trong dom, không có trên UI -> phải thao tác đúng mới hiển thị trên UI để thao tác
+	+ TH2: Không có trong dom, không có trên UI -> phải thao tác đúng mới hiển thị trên UI và dom để thao tác
+	
+- Presence
+	+ Có ở trong dom, có ở trên UI
+	+ Có ở trong dom, không có trên UI
+	
+- Staleness
+	+ Không có ở trong dom
