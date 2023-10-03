@@ -1,30 +1,35 @@
-* Một element có 4 trạng thái chính:
 
+* Một element có 4 trạng thái chính:
 - Visible (element hiển thị): Có thể nhìn thấy và thao tác được
 	+ Có trên dom 
 	+ Có trên UI màn hình
 	+ Tips: bắt Xpath thì có thấy hiển thị
-	
 - Invisible (element bị ẩn): Người dùng không nhìn thấy, không thao tác được
 	+ TH1: Có trong dom, không có trên UI -> phải thao tác đúng mới hiển thị trên UI để thao tác
 	+ TH2: Không có trong dom, không có trên UI -> phải thao tác đúng mới hiển thị trên UI và dom để thao tác
-	
 - Presence
 	+ Có ở trong dom, có ở trên UI
 	+ Có ở trong dom, không có trên UI
-	
 - Staleness
 	+ Không có ở trong dom
-	
 	
 	
 * Các loại Wait:
 - ExplicitWait:
 	+ Rõ ràng theo từng trạng thái của element: bắt đúng trạng thái của element
+	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
 - ImplicitWait:
 	+ Ảnh hưởng trực tiếp đến hàm findElement và findElements
 	+ Ngầm định
-	+ Cách nó làm việc khi find element: https://prnt.sc/TeeM9W1P82_c
+	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
+	+ Cách nó làm việc khi find element: (https://prnt.sc/TeeM9W1P82_c)
+- FluentWait:
+	+
+	+
+	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
+- StaticWait:
+	+
+	+ Fix cứng: Luôn phải chờ đến khi hết timeout đã set
 	
 	
 	

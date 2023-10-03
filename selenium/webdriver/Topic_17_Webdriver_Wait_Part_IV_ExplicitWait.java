@@ -1,20 +1,20 @@
 package webdriver;
 
-import java.util.Date;
 import java.time.Duration;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_18_Webdriver_Wait_Part_II {
+public class Topic_17_Webdriver_Wait_Part_IV_ExplicitWait {
 	WebDriver driver;
+	WebDriverWait explicitWait;
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
 
@@ -27,39 +27,28 @@ public class Topic_18_Webdriver_Wait_Part_II {
 		}
 
 		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		
+		explicitWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		//driver.manage().window().maximize();
-		driver.get("https://test.med247.me/users/sign_in");
 	}
 	
 	@Test
-	public void TC_01_Find_Element() {
-		// find 1 element
-		System.out.println("1 - Start: " + getDateTimeNow());
-		driver.findElement(By.xpath("//input[@id='user_remember_me']")).click();
-		System.out.println("1 - End: " + getDateTimeNow());
+	public void TC_01_ExplicitWait() {
+		driver.get("http://juliemr.github.io/protractor-demo/");
 		
-		// > 1 element
-		System.out.println("2 - Start: " + getDateTimeNow());
-		driver.findElement(By.xpath("//input[@required='required']")).sendKeys("letan_test_prefix@med247.co");
-		System.out.println("2 - End: " + getDateTimeNow());
+		driver.findElement(By.xpath("//input[@ng-model='first']")).sendKeys("10");
+		driver.findElement(By.xpath("//input[@ng-model='second']")).sendKeys("15");
+		driver.findElement(By.id("gobutton")).click();
 		
-		// 0 element
-		System.out.println("3 - Start: " + getDateTimeNow());
-		try {
-			driver.findElement(By.xpath("//input[@required='required123']")).isDisplayed();
-		} catch (Exception e) {
-			System.out.println("3 - End: " + getDateTimeNow());
-		}
+		sleepInSecond(10);
+		Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='25']")).isDisplayed());
 	}
 	
 	
-	public void TC_02_Find_Elements() {
+	public void TC_02_() {
 		
 	}
 	
-
+	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
@@ -69,6 +58,16 @@ public class Topic_18_Webdriver_Wait_Part_II {
 	public String getDateTimeNow() {
 		Date date = new Date();
 		return date.toString();
+	}
+	
+	public void sleepInSecond(long second) {
+		try {
+			Thread.sleep(second*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
