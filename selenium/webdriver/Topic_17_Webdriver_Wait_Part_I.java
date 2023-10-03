@@ -12,7 +12,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_17_Webdriver_Wait {
+public class Topic_17_Webdriver_Wait_Part_I {
 	WebDriver driver;
 	WebDriverWait explicitWait;
 	String projectPath = System.getProperty("user.dir");
@@ -75,6 +75,7 @@ public class Topic_17_Webdriver_Wait {
 		explicitWait.until(ExpectedConditions.stalenessOf(element));
 		
 	}
+	
 
 	@AfterClass
 	public void afterClass() {

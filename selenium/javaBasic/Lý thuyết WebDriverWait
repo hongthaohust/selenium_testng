@@ -18,6 +18,13 @@
 	
 	
 	
+* Các loại Wait:
+- ExplicitWait:
+	+ Rõ ràng theo từng trạng thái của element: bắt đúng trạng thái của element
+- ImplicitWait:
+	+ Ảnh hưởng trực tiếp đến hàm findElement và findElements
+	+ Ngầm định
+	+ Cách nó làm việc khi find element: https://prnt.sc/TeeM9W1P82_c
 	
 	
 	
@@ -27,5 +34,4 @@
 	
 	
 	
-	mngr529632 / qajepyn
 	
