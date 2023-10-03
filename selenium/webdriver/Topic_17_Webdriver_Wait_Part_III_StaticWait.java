@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 public class Topic_17_Webdriver_Wait_Part_III_StaticWait {
 	WebDriver driver;
-	WebDriverWait explicitWait;
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
 
@@ -27,7 +26,6 @@ public class Topic_17_Webdriver_Wait_Part_III_StaticWait {
 		}
 
 		driver = new FirefoxDriver();
-		explicitWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		//driver.manage().window().maximize();
 	}
 	
