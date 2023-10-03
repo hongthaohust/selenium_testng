@@ -28,7 +28,6 @@
 	+
 	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
 - StaticWait:
-	+
 	+ Fix cứng: Luôn phải chờ đến khi hết timeout đã set
 	
 	
