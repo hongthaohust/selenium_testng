@@ -2,9 +2,6 @@ package webdriver;
 
 import java.time.Duration;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,7 +63,7 @@ public class Topic_17_Webdriver_Wait_Part_V_MixingWait {
 		System.out.println("End: "+getDateTimeNow());
 	}
 	
-	@Test
+	
 	public void TC_03_Element_NotFound_Implicit_GreaterThan_Explicit() {
 		driver.get("https://www.facebook.com/");
 		
@@ -84,9 +81,21 @@ public class Topic_17_Webdriver_Wait_Part_V_MixingWait {
 		System.out.println("End: "+getDateTimeNow());
 	}
 
-	
-	public void TC_04_() {
+	@Test
+	public void TC_04_element_Not_found_Only_ExplicitWait() {
+		driver.get("https://www.facebook.com/");
 		
+		explicitWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		
+		System.out.println("Start: "+getDateTimeNow());
+		try {
+			explicitWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//input[@name='khong_co_o_day']"))));
+			System.out.println("Có tìm thấy element");
+		}
+		catch (Exception e) {
+			System.out.println("Không tìm thấy element");
+		}
+		System.out.println("End: "+getDateTimeNow());
 	}
 	
 	

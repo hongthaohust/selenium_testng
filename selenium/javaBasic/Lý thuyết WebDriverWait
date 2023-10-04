@@ -18,20 +18,54 @@
 - ExplicitWait:
 	+ Rõ ràng theo từng trạng thái của element: bắt đúng trạng thái của element
 	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
+	+ Cách khai báo và sử dụng:
+		++ Khai kháo: WebDriverWait explicitWait;
+		++ Khởi tạo: explicitWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		++ Sử dụng explicitWait với các phương thức phù hợp:
+			+++ visible: explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("")))
+			+++ invisible: explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("")))
+			+++ clickable: explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("")))
+			+++ present,....
 - ImplicitWait:
 	+ Ảnh hưởng trực tiếp đến hàm findElement và findElements
 	+ Ngầm định
 	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
 	+ Cách nó làm việc khi find element: (https://prnt.sc/TeeM9W1P82_c)
+	+ Khai báo và sử dụng: Chỉ cần 1 dòng code
+		++ driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 - FluentWait:
-	+
-	+
-	+ flexible: không cần phải chờ hết timeout sau khi thảo mãn điều kiện
+	+ Giống với explicitWait và implicitWait nhưng được tự config polling (tần suất tìm kiếm element)
+	+ flexible: không cần phải chờ hết timeout sau khi thỏa mãn điều kiện
+	+ Khai báo và sử dụng: dài dòng
+		++ Khai báo: FluentWait<WebElement> fluentElement;
+		++ Khởi tạo: fluentElement = new FluentWait<WebElement>(element);
+		++ Sử dụng:
+	{
+		fluentElement.withTimeout(Duration.ofSeconds(15))
+			// Tần số mỗi 1s check 1 lần
+			.pollingEvery(Duration.ofSeconds(1))
+			// Nếu gặp exeption là tìm không thấy element sẽ bỏ qua
+			.ignoring(NoSuchFieldException.class)
+			// Kiểm tra điều kiện
+			.until(new Function<WebElement, Boolean>() {
+				public Boolean apply(WebElement element) {
+					// Kiểm tra điều kiện countdown = 00
+					Boolean flag = element.getText().endsWith("00");
+					System.out.println("Time = " + element.getText());
+					// Return giá trị cho function apply
+					return flag;
+				}
+			});
+		}
 - StaticWait:
 	+ Fix cứng: Luôn phải chờ đến khi hết timeout đã set
+	+ Khai báo và sử dụng: dùng hàm Thread.sleep();
 	
-	
-	
+* Các loại exeption và nguyên nhân:
+- StaleElement: do DOM đã bị change -> element không được tìm lại sau khi thay đổi DOM
+- NoSuchElementExeption: exeption trả về của ImplicitWait do không tìm được element khi hết timeout
+- TimeoutExeption (expected condition failed: waiting for ... of element located by ...): do ExplicitWait hết timeout
+- TimeoutExeption (expected condition failed: waiting for ... (tried for ... second(s) with ... milliseconds interval)): timeout của FluentWait
 	
 	
 	
