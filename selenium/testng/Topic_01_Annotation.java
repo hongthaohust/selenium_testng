@@ -12,47 +12,56 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
 public class Topic_01_Annotation {
-  @Test(dataProvider = "dp")
-  public void f(Integer n, String s) {
+  @Test (groups = "Annotation")
+  public void TC_01() {
+	  System.out.println("Run testcase 01");
+  }
+  @Test (groups = "Annotation")
+  public void TC_02() {
+	  System.out.println("Run testcase 02");
+  }
+  @Test
+  public void TC_03() {
+	  System.out.println("Run testcase 03");
   }
   @BeforeMethod
   public void beforeMethod() {
+	  System.out.println("Run BeforeMethod");
   }
 
   @AfterMethod
   public void afterMethod() {
+	  System.out.println("Run AfterMethod");
   }
 
-
-  @DataProvider
-  public Object[][] dp() {
-    return new Object[][] {
-      new Object[] { 1, "a" },
-      new Object[] { 2, "b" },
-    };
-  }
   @BeforeClass
   public void beforeClass() {
+	  System.out.println("Run BeforeClass");
   }
 
   @AfterClass
   public void afterClass() {
+	  System.out.println("Run AfterClass");
   }
 
   @BeforeTest
   public void beforeTest() {
+	  System.out.println("Run BeforeTest");
   }
 
   @AfterTest
   public void afterTest() {
+	  System.out.println("Run AfterTest");
   }
 
   @BeforeSuite
   public void beforeSuite() {
+	  System.out.println("Run BeforeSuite");
   }
 
   @AfterSuite
   public void afterSuite() {
+	  System.out.println("Run AfterSuite");
   }
 
 }

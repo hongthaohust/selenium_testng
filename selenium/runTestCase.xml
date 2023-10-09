@@ -2,7 +2,18 @@
 <suite parallel="false" name="Suite">
   <test name="Test">
     <classes>
-      <class name="testng.Topic_01_Annotation"/>
+      <!-- <class name="testng.Topic_01_Annotation"/> -->
     </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+    
+    <packages>
+    	<package name="testng"/>
+    </packages>
+    
+    <groups>
+    	<run>
+    		<include name="Annotation"/>
+    	</run>
+    </groups>
+    
+  </test>
+</suite>

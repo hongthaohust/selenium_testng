@@ -1,0 +1,36 @@
+* Thứ tự chạy các Annotation
+Run BeforeSuite
+	Run BeforeTest
+		Run BeforeClass
+			Run BeforeMethod
+			Run testcase 01
+			Run AfterMethod
+			
+			Run BeforeMethod
+			Run testcase 02
+			Run AfterMethod
+			
+			Run BeforeMethod
+			Run testcase 03
+			Run AfterMethod
+		Run AfterClass
+	Run AfterTest
+Run AfterSuite
+
+
+* Groups:
+- Thêm tại các annotation cú pháp: (groups = "{tên group}")
+- Tại file run testcase sử dụng group để chạy 1 group:
+	<groups>
+    	<run>
+    		<include name="{tên group}"/>
+    	</run>
+    </groups>
+    
+ * alwaysRun = true
+ - Sử dụng cho Before<xxx> và After<xxx>
+ - Dùng để ép cho annotation luôn được thực hiện dù các step trước đã false
+ 
+ * Priority/Skips testcase
+ - Priority = 1,2,3,....
+ - Skips: enabled = true/false
