@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="tests" name="Selenium WebDriver API" thread-count="3">
+  <test name="Run on Firefox">
+    <packages>
+    	<package name="testng"/>
+    </packages>
+  </test>
+
+</suite>

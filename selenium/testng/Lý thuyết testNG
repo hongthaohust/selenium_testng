@@ -75,3 +75,11 @@ Run AfterSuite
 
 * Parallel:
 - Để chạy nhiều trình duyệt cùng lúc: cân nhắc khi chạy trên local vì những case di chuột, hover chuột
+
+* Loop:
+- Lặp lại testcase nhiều lần
+- Cú pháp: thêm lệnh sau tại @Test: invocationCount= {number}
+
+* Package:
+- Chạy toàn bộ package
+- Tại file .xml

@@ -15,7 +15,7 @@ public class Topic_02 {
 	  System.out.println("Run BeforeClass");
 	  driver = new FirefoxDriver();
 	  
-	  Assert.assertTrue(false);
+	  //Assert.assertTrue(false);
   }
   
   @Test (groups = "Annotation")
