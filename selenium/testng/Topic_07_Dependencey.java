@@ -1,7 +1,5 @@
 package testng;
 
-import java.util.Random;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
