@@ -34,3 +34,44 @@ Run AfterSuite
  * Priority/Skips testcase
  - Priority = 1,2,3,....
  - Skips: enabled = true/false
+ 
+ * DataProvider (Data driven testing):
+ - Tạo hàm DataProvider có tên hàm, kiểu dữ liệu là Object[][]
+		Ví dụ:	 @DataProvider(name = "Login_Med247")
+					public Object[][] Med247_login(){
+						return new Object[][] {
+							{"quangvinh@yopmail.com","Med247@"},
+							{"letan_test_prefix@med247.co","Med247@"}
+						};
+					}
+ - Tại annotation @Test, add thêm tên dataProvider được sử dụng: vd: @Test(dataProvider = "Login_Med247")
+ 
+ * Parameter:
+ - Để chạy nhiều trình duyệt, nhiều môi trường, nhiều hệ điều hành,...
+ - Thêm tag <parameter /> tại file xml tại mỗi thẻ chạy test: chứa {name} và {value}
+ 	ví dụ:   <test name="Run on Chrome">
+			  	<parameter name="browserName" value ="chrome"/>
+			    <classes>
+			      <class name="testng.Topic_05_Parameter"/>
+			    </classes>
+			  </test>
+ - Tại file testcase.java: gọi annotation @parameter("browserName")
+ - Xử lý logic mở nhiều trình duyệt:
+ 		if(browser.equals("firefox")) {
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			driver = new FirefoxDriver();
+		} else if(browser.equals("chrome")) {
+			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			driver = new ChromeDriver();
+		} else if(browser.equals("edge")) {
+			System.setProperty("webdriver.edge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
+			driver = new EdgeDriver();
+		} else {
+			throw new RuntimeException("Please input your brower name!");
+		}
+* Optional:
+- Dùng backup trong trường hợp quên không gọi parameter tại file xml
+- Thêm tag @Optional("{value}") tại hàm có sử dụng parameter
+
+* Parallel:
+- Để chạy nhiều trình duyệt cùng lúc: cân nhắc khi chạy trên local vì những case di chuột, hover chuột
