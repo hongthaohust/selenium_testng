@@ -111,3 +111,14 @@ Run AfterSuite
 		++ Không phải là thư viện
 	+ Library:
 		++ Là thư viện bổ trợ cho việc viết code
+
+		
+				
+		
+		
+*** Automation Testing Framework Type:
+- Record Playback: những dự án ngắn hạn
+- Data Driven
+- Keywork
+- Hybrid
+- Behavier
