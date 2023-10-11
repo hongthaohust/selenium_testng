@@ -121,7 +121,7 @@ public class Topic_11_Alert {
 		String password = "admin";
 		
 		//Cách 1: Xác thực username/password qua link luôn, không bật alert lên nữa
-		//driver.get("http://" +username+":" +password+ "@the-internet.herokuapp.com/basic_auth");
+		driver.get("http://" +username+":" +password+ "@the-internet.herokuapp.com/basic_auth");
 		
 		// Cách 2: Từ link A qua bước xác thực authen để vào được link B
 //		driver.get("http://the-internet.herokuapp.com/");
@@ -130,10 +130,10 @@ public class Topic_11_Alert {
 //		handleAuthenAlert(linkHref,username,password);
 		
 		// Cách 3: Cài autoIT hoặc có đoạn script rồi thì không cần cài
-		Runtime.getRuntime().exec(new String[] { firefoxAuthen, username, password});
-		sleepInSecond(3);
-		driver.get("http://the-internet.herokuapp.com/basic_auth");
-		sleepInSecond(3);
+//		Runtime.getRuntime().exec(new String[] { firefoxAuthen, username, password});
+//		sleepInSecond(3);
+//		driver.get("http://the-internet.herokuapp.com/basic_auth");
+//		sleepInSecond(3);
 
 		
 		

@@ -83,3 +83,31 @@ Run AfterSuite
 * Package:
 - Chạy toàn bộ package
 - Tại file .xml
+
+* Dependency:
+- Xác định 1 testcase phụ thuộc vào testcase nào đó: testcase được phụ thuộc phải pass thì mới thực hiện testcase phụ thuộc
+- Cú pháp: thêm lệnh sau tại @Test: dependsOnMethods="{tên testcase được phụ thuộc}"
+
+* Listener:
+- Class kế thừa 1 class: extends
+- Class thực hiện (kế thừa) 1 interface: implements
+
+* So sánh TestNG và JUnit 4
+- TestNG:
+	+ là unit testing framework cho ngôn ngữ lập trình Java
+	+ Hỗ trợ, tích hợp với các tools: ANT, Gradle, Maven
+	+ Hỗ trợ các annotation: @Test, before/after class, before/after medthod, before/after Suite, before/after test, before/after group
+	+ Hỗ trợ parameter, parallel, dataDriven, Group priority, multiple Threads, Loops
+	=> Hỗ trợ tốt hơn khi built framework dạng Hybrid
+- JUnit:
+	+ là unit testing framework cho ngôn ngữ lập trình Java
+	+ Hỗ trợ, tích hợp với các tools: ANT, Gradle, Maven
+	+ Không hỗ trợ những phần còn lại
+	=> Hỗ trợ tốt hơn khi built framework dạng Behavior (BDD)/ Cucumber
+	
+* TestNG plugin (Eclipse/IntelliJ) vs TestNG Library (.jar):
+	+ Plugin:
+		++ test Runner: Hỗ trợ để chạy 1 class test từ context menu
+		++ Không phải là thư viện
+	+ Library:
+		++ Là thư viện bổ trợ cho việc viết code
