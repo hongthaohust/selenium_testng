@@ -42,5 +42,6 @@ public class Topic_01_DataType {
 		System.out.println(c);
 
 	}
+	
 
 }
