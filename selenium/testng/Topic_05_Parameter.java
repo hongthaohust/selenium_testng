@@ -6,7 +6,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import java.lang.reflect.Method;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -62,6 +61,7 @@ public class Topic_05_Parameter {
 		
 		Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='Đăng nhập tài khoản']")).isDisplayed());	
 	}
+	
 	
 	@DataProvider(name = "Login_Med247")
 	public Object[][] Med247_login(){
