@@ -14,7 +14,6 @@ public class Topic_01_DataType {
 	*/
 
 	public static void main(String[] args) {
-		
 		// Chuỗi
 		String name = "Nguyễn Văn A";
 		
