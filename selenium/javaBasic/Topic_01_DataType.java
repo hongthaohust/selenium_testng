@@ -19,7 +19,7 @@ public class Topic_01_DataType {
 		// Chuỗi
 		String name = "Nguyễn Văn A";
 		
-		//Ký tự
+		//Ký tự 
 		char c = 's';
 		
 		// Số nguyên: byte/short/int/long
